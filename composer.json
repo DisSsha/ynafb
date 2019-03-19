@@ -1,0 +1,17 @@
+{
+    "name": "ynafb/ynafb",
+    "authors": [
+        {
+            "name": "Julien Merlin",
+            "email": "merlin.julien@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "require": {
+        "slim/slim": "^3.12"
+    }
+}

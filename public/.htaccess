@@ -1,0 +1,23 @@
+# Disable directory browsing
+Options All -Indexes
+
+# Deny direct access to certain type of files
+<FilesMatch "(\.(bak|config|dist|fla|inc|ini|log|psd|sh|sql|swp|twig|git|gitignore|htaccess|htpasswd|local)|~)$">
+    ## Apache 2.2
+    Order allow,deny
+    Deny from all
+    Satisfy All
+
+    ## Apache 2.4
+    # Require all denied
+</FilesMatch>
+
+RewriteEngine on
+
+# Deny access to .git directory
+RedirectMatch 404 /\.git
+
+# Redirect all requests to index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [L]
