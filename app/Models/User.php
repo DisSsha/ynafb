@@ -5,5 +5,6 @@ use App\Core\Model;
 
 class User extends Model
 {
+    var $table = "user";
 
 }

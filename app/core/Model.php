@@ -10,7 +10,7 @@ class Model
     private $host	= 'localhost';
     private $database	= 'ynafb';
     private $login	= 'ynafb';
-    private $password	= 'ynafb';
+		private $password	= 'ynafb';
 
     public function __construct(){
 		try{
@@ -46,7 +46,7 @@ class Model
 			$sql.='*';
 		}
 
-		$sql .= ' FROM '.$this->table.' as '.get_class($this).' ';
+		$sql .= ' FROM '.$this->table.' ';
 
 		// Jointure ?
 		if(isset($req['join'])){
@@ -64,7 +64,7 @@ class Model
 				$cond = array(); 
 				foreach($req['conditions'] as $k=>$v){
 					if(!is_numeric($v)){
-						$v = '"'.mysql_escape_string($v).'"'; 
+						$v = $this->db->quote($v); 
 					}
 					
 					$cond[] = "$k=$v";
@@ -83,7 +83,7 @@ class Model
 			$sql .= ' LIMIT '.$req['limit'];
 		}
 
-		$pre = $this->db->prepare($sql); 
+		$pre = $this->db->prepare($sql);
 		$pre->execute(); 
 		return $pre->fetchAll(PDO::FETCH_OBJ);
     }
